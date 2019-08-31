@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Sun Oct 13 21:00:31 BRT 2013
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=Fabrica21.jar
+manifest.mergeall=true
+manifest.mainclass=view.ViewGame
+manifest.file=src\\META-INF\\MANIFEST.MF
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=

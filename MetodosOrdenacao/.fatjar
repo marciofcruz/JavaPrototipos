@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Sat Apr 27 15:26:03 BRT 2013
+onejar.license.required=false
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=apsmetodosordenacao.jar
+manifest.mergeall=true
+manifest.mainclass=metodosOrdenacao.MetodosOrdenacao
+manifest.file=src\\META-INF\\MANIFEST.MF
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=
