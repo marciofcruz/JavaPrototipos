@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="corpo">
+
+		<p:growl id="growl" life="3000" />
+
+		<h:form id="form-logradouro" style="margin-bottom: 20px">
+
+			<p:panel id="painel-logradouro" header="Dados do logradouro"
+				toggleable="true" style="margin-bottom:10px;"
+				visible="#{logradouroBean.logradouro.id ne null}">
+
+				<h:inputHidden id="id" value="#{logradouroBean.logradouro.id}" />
+
+				<h:panelGrid columns="3" style="margin-bottom: 15px">
+
+					<p:outputLabel value="Logradouro:" for="logradouro" />
+					<p:inputText id="logradouro"
+						value="#{logradouroBean.logradouro.nome}" style="width: 100%"
+						required="true" placeholder="Qual o nome do logradouro?"
+						requiredMessage="Logradouro obrigatório!" />
+					<p:message for="logradouro" />
+
+					<p:outputLabel value="Tipo:" for="tipo" />
+					<p:inputText id="tipo" value="#{logradouroBean.logradouro.tipo}"
+						style="width: 100%" required="true"
+						placeholder="Qual o tipo do logradouro?"
+						requiredMessage="Tipo obrigatório!" />
+					<p:message for="tipo" />
+
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<p:commandButton action="#{logradouroBean.setLogradouro(null)}"
+						value="Cancelar" update=":form-logradouros,@form,growl"
+						process="@form" />
+					<p:commandButton action="#{logradouroBean.atualiza}"
+						value="Atualizar" update=":form-logradouros,@form,growl"
+						process="@form" />
+				</h:panelGrid>
+
+			</p:panel>
+
+		</h:form>
+
+		<h:form id="form-logradouros">
+
+			<p:panel id="painel-logradouros" header="Listagem de logradouros"
+				toggleable="true" style="margin-bottom:10px">
+
+				<p:dataTable id="tabela-logradouros" var="logradouro"
+					value="#{logradouroBean.logradouros}">
+
+					<p:column headerText="Logradouro">
+						<h:outputText value="#{logradouro.nome}"
+							sortBy="#{logradouro.nome}" />
+					</p:column>
+
+					<p:column headerText="Tipo" priority="2">
+						<h:outputText value="#{logradouro.tipo}"
+							sortBy="#{logradouro.tipo}" />
+					</p:column>
+
+					<p:column>
+						<p:commandLink
+							action="#{logradouroBean.setLogradouro(logradouro)}"
+							immediate="true" update=":form-logradouro" process="@form">
+							<h:graphicImage library="imagens" name="edit.png" title="editar"
+								style="border:0" />
+						</p:commandLink>
+					</p:column>
+
+				</p:dataTable>
+
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

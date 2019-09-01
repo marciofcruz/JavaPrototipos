@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="corpo">
+
+		<p:growl id="growl" life="3000" />
+
+		<h:form id="form-cidade" style="margin-bottom: 20px">
+
+			<p:panel id="painel-cidade" header="Dados da cidade"
+				toggleable="true" style="margin-bottom:10px;">
+
+				<h:inputHidden id="id" value="#{cidadeBean.cidade.id}" />
+
+				<h:panelGrid columns="3" style="margin-bottom: 15px">
+
+					<p:outputLabel value="Cidade:" for="cidade" />
+					<p:inputText id="cidade" value="#{cidadeBean.cidade.nome}"
+						style="width: 100%" required="true"
+						placeholder="Qual o nome da cidade?"
+						requiredMessage="Cidade obrigatória" />
+					<p:message for="cidade" />
+
+				</h:panelGrid>
+
+				<p:commandButton action="#{cidadeBean.grava}" value="Gravar"
+					update=":form-cidades,@form,growl" process="@form" />
+
+			</p:panel>
+
+		</h:form>
+
+		<h:form id="form-cidades">
+
+			<p:panel id="painel-cidades" header="Listagem de cidades"
+				rendered="#{cidadeBean.cidades.size() > 0}" toggleable="true"
+				style="margin-bottom:10px">
+
+				<p:dataTable id="tabela-cidades" var="cidade"
+					value="#{cidadeBean.cidades}">
+
+					<p:column headerText="Cidade">
+						<h:outputText value="#{cidade.nome}" sortBy="#{cidade.nome}" />
+					</p:column>
+
+					<p:column>
+						<p:commandLink action="#{cidadeBean.setCidade(cidade)}"
+							immediate="true" update=":form-cidade" process="@form">
+							<h:graphicImage library="imagens" name="edit.png" title="editar"
+								style="border:0" />
+						</p:commandLink>
+					&nbsp;
+						<p:commandLink action="#{cidadeBean.remove(cidade)}"
+							immediate="true" update="@form,growl" process="@form">
+							<h:graphicImage library="imagens" name="delete.png"
+								title="remover" style="border:0" />
+						</p:commandLink>
+					</p:column>
+
+				</p:dataTable>
+
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>
