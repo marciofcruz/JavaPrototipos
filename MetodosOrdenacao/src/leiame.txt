@@ -1,0 +1,9 @@
+Para executar este trabalho, digite no prompt de comando:
+
+cd package
+java -jar apsmetodosordenacao.jar
+
+marcio@marciofcruz.com
+Marcio Fernandes Cruz
+
+CC2P13 - Ciência da COmputação - Unip/Marquês
